@@ -2,6 +2,7 @@ const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 
 const myVideo = document.createElement("video");
+myVideo.setAttribute("playsinline", true);
 myVideo.muted = true;
 const peers = {};
 navigator.mediaDevices
@@ -14,6 +15,7 @@ navigator.mediaDevices
     function connectToNewUser(userId, stream) {
       const call = myPeer.call(userId, stream);
       const video = document.createElement("video");
+      video.setAttribute("playsinline", true);
       call.on("stream", (userVideoStream) => {
         addVideoStream(video, userVideoStream);
       });
@@ -43,6 +45,7 @@ navigator.mediaDevices
     myPeer.on("call", (call) => {
       call.answer(stream);
       const video = document.createElement("video");
+      video.setAttribute("playsinline", true);
       call.on("stream", (userVideoStream) => {
         addVideoStream(video, userVideoStream);
       });
